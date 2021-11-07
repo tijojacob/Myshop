@@ -31,19 +31,21 @@ namespace MyShop.DataAccess.InMemory
             Product productToUpdate = products.Find(x => x.Id == p.Id);
             if (productToUpdate != null)
             {
-                //productToUpdate.Name = p.Name;
-                //productToUpdate.Price = p.Price;
-                //productToUpdate.Image = p.Image;
-                productToUpdate = p;
+                productToUpdate.Name = p.Name;
+                productToUpdate.Price = p.Price;
+                productToUpdate.Image = p.Image;
+                productToUpdate.Catagery = p.Catagery;
+                productToUpdate.Id = p.Id;
+                //productToUpdate = p;
             }
             else
             {
                 throw new Exception("No Product Found!.");
             }
         }
-        public Product Find(Product p)
+        public Product Find(string Id)
         {
-            Product product = products.Find(x => x.Id == p.Id);
+            Product product = products.Find(x => x.Id == Id);
             if (product != null)
             {
                 return product;
