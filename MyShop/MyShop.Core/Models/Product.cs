@@ -13,10 +13,14 @@ namespace MyShop.Core.Models
         public string Id { get; set; }
         [StringLength(30)]
         [DisplayName("Product")]
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         [Range(0,10000)]
+        [Required]
         public decimal Price { get; set; }
+        [Required]
         public string Catagery { get; set; }
         public string Image { get; set; }
 
