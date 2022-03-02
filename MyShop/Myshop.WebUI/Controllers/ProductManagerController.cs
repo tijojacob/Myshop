@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,15 +47,20 @@ namespace Myshop.WebUI.Controllers
             //return View(p);
         }
         [HttpPost]
-        public ActionResult Create(ProductManagerViewModel newProduct)
+        public ActionResult Create(Product product,HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
-                return View(newProduct.Product);
+                return View(product);
             }
             else
             {
-                context.Insert(newProduct.Product);
+                if(file!=null)
+                {
+                    product.Image= product.Id + Path.GetFileName(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+                }
+                context.Insert(product);
                 context.Commit();
                 return RedirectToAction("Index");
             }
@@ -81,7 +87,7 @@ namespace Myshop.WebUI.Controllers
                 return HttpNotFound();
             }
             else 
-            {
+            {                
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
                 viewModel.Product = product;
                 viewModel.ProductCategories = productCategoryRepository.Collection();
@@ -90,10 +96,10 @@ namespace Myshop.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(ProductManagerViewModel updatedProduct, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
-            Product product = context.Find(Id);
-            if (product == null)
+            Product productToEdit = context.Find(Id);
+            if (productToEdit == null)
             {
                 return HttpNotFound();
             }
@@ -101,11 +107,30 @@ namespace Myshop.WebUI.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(updatedProduct.Product);
+                    ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                    viewModel.Product = product;
+                    viewModel.ProductCategories = productCategoryRepository.Collection();
+                    return View(viewModel);
                 }
                 else
                 {
-                    context.Update(updatedProduct.Product);
+                    if (file != null)
+                    {
+                        var path = Server.MapPath("//Content//ProductImages//") + productToEdit.Image;
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+
+                        productToEdit.Image = product.Id + Path.GetFileName(file.FileName);
+                        file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+                    }
+                    //context.Update(productToEdit);
+                    productToEdit.Catagery = product.Catagery;
+                    productToEdit.Description = product.Description;
+                    productToEdit.Name = product.Name;
+                    productToEdit.Price = product.Price;
+
                     context.Commit();
                     return RedirectToAction("Index");
                 }
@@ -144,6 +169,11 @@ namespace Myshop.WebUI.Controllers
             else
             {
                 context.Delete(productToDelete);
+                var path=Server.MapPath("//Content//ProductImages//") + productToDelete.Image;
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
                 context.Commit();
                 return RedirectToAction("Index");
             }

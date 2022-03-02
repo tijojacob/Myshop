@@ -73,7 +73,8 @@ namespace Myshop.WebUI.Controllers
                 }
                 else
                 {
-                    context.Update(updatedProductCateg);
+                    productCateg.Catagery = updatedProductCateg.Catagery;
+                    //context.Update(updatedProductCateg);
                     context.Commit();
                     return RedirectToAction("Index");
                 }
