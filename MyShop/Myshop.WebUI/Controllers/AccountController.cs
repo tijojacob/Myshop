@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Myshop.WebUI.Models;
+using MyShop.Core.Models;
+using MyShop.Core.Contracts;
 
 namespace Myshop.WebUI.Controllers
 {
@@ -17,15 +19,18 @@ namespace Myshop.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IInMemoryRepository<Customer> _customerRepository;
 
-        public AccountController()
-        {
-        }
+        //public AccountController()
+        //{
+        //}
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(//ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+                                 IInMemoryRepository<Customer> customerRepository)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            //UserManager = userManager;
+            //SignInManager = signInManager;
+            this._customerRepository= customerRepository;
         }
 
         public ApplicationSignInManager SignInManager
@@ -155,6 +160,21 @@ namespace Myshop.WebUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //register Customer Model
+                    Customer customer = new Customer()
+                    {
+                        City = model.City,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        State = model.State,
+                        Street = model.Street,
+                        ZipCode = model.ZipCode,
+                        UserId = user.Id
+                    };
+
+                    _customerRepository.Insert(customer);
+                    _customerRepository.Commit();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
