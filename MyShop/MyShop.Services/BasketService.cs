@@ -23,7 +23,10 @@ namespace MyShop.Services
 
         private Basket GetBasket(HttpContextBase httpContext,bool createIfNull)
         {
-            HttpCookie cookie = httpContext.Request.Cookies.Get(BasketSessionName);
+            HttpCookie cookie;
+           
+            cookie = httpContext.Request.Cookies.Get(BasketSessionName);
+           
             Basket basket = new Basket();
             if (cookie!=null)
             {
