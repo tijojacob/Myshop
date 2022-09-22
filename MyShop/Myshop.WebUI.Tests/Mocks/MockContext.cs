@@ -11,7 +11,7 @@ namespace Myshop.WebUI.Tests.Mocks
     public class MockContext<T> : IInMemoryRepository<T> where T : BaseEntity
     {
         List<T> items;
-        string className;
+        string className=String.Empty;
         public MockContext()
         {            
             items = new List<T>();           
