@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyShop.Core.ViewModel
+namespace MyShop.Core.Models
 {
-    public class BasketItemViewModel
+    public class OrderItem : BaseEntity
     {
-        public string Id { get; set; }
-        public Int64 Quantity { get; set; }
+        public string OrderId { get; set; }
+        public string ProductId { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
+        public Int64 Quantity { get; set; }
+
     }
 }

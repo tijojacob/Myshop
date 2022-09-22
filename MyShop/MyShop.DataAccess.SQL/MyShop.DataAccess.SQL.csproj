@@ -64,6 +64,18 @@
     <Compile Include="Migrations\202209201255100_AddCustomers.designer.cs">
       <DependentUpon>202209201255100_AddCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209211132071_AddAspNetUsers-Orders.cs" />
+    <Compile Include="Migrations\202209211132071_AddAspNetUsers-Orders.designer.cs">
+      <DependentUpon>202209211132071_AddAspNetUsers-Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220338530_PendingMigrations.cs" />
+    <Compile Include="Migrations\202209220338530_PendingMigrations.designer.cs">
+      <DependentUpon>202209220338530_PendingMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220626180_PendingMigrations4.cs" />
+    <Compile Include="Migrations\202209220626180_PendingMigrations4.designer.cs">
+      <DependentUpon>202209220626180_PendingMigrations4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -88,6 +100,18 @@
     <EmbeddedResource Include="Migrations\202209201255100_AddCustomers.resx">
       <DependentUpon>202209201255100_AddCustomers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209211132071_AddAspNetUsers-Orders.resx">
+      <DependentUpon>202209211132071_AddAspNetUsers-Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220338530_PendingMigrations.resx">
+      <DependentUpon>202209220338530_PendingMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220626180_PendingMigrations4.resx">
+      <DependentUpon>202209220626180_PendingMigrations4.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AspNetUsersSQL.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
