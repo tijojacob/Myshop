@@ -11,6 +11,7 @@ using MyShop.DataAccess.InMemory;
 
 namespace Myshop.WebUI.Controllers
 {
+    [CustomAuthorize]
     public class ProductManagerController : Controller
     {
         //ProductRepository context;

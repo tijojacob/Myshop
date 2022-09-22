@@ -24,8 +24,11 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>
         <li>@Html.ActionLink("Product Catagory Admin", "Index", "ProductCategoryManager")</li>*@
+                    @if (Request.IsAuthenticated &&
+                        User.Identity.Name.Equals((System.Configuration.ConfigurationManager.AppSettings["AdminUserId"]).ToString()))
+                    {
                     <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
-
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
                 @{ 

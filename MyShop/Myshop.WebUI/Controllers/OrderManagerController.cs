@@ -7,7 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Myshop.WebUI.Controllers
-{
+{    
+    [CustomAuthorize]
     public class OrderManagerController : Controller
     {
         IOrderService orderService;

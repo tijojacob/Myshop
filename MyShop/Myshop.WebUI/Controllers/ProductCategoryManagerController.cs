@@ -9,6 +9,7 @@ using MyShop.DataAccess.InMemory;
 
 namespace Myshop.WebUI.Controllers
 {
+    [CustomAuthorize]
     public class ProductCategoryManagerController : Controller
     {
         // GET: ProductCategory
