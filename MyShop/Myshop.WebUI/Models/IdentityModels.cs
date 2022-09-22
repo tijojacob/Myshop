@@ -35,5 +35,7 @@ namespace Myshop.WebUI.Models
         public System.Data.Entity.DbSet<MyShop.Core.ViewModel.BasketItemViewModel> BasketItemViewModels { get; set; }
 
         public System.Data.Entity.DbSet<MyShop.Core.Models.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<MyShop.Core.Models.OrderItem> OrderItems { get; set; }
     }
 }

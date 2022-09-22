@@ -2,6 +2,7 @@
 using MyShop.Core.Models;
 using MyShop.Core.ViewModel;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyShop.Services
 {
@@ -29,6 +30,19 @@ namespace MyShop.Services
             }
             orderContent.Insert(baseOrder);
             orderContent.Commit();
+        }
+        public List<Order> GetOrderList()
+        {
+            return orderContent.Collection().ToList();
+        }
+        public Order GetOrder(string Id)
+        {
+            return orderContent.Find(Id);
+        }
+        public void UpdateOrder(Order updateOrder)
+        {
+            orderContent.Update(updateOrder);
+            orderContent.Commit(); 
         }
     }
 }
